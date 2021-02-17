@@ -17,7 +17,8 @@ const ViewAgency = ({ modal, toggle, agencyData }) => {
         <ModalBody>
           <Row>
             <Col md="6">
-              <span>Name: {agencyData.name}</span>
+              <Col md="6">Name:</Col>
+              <Col md="6"> {agencyData.name}</Col>
             </Col>
             <Col md="6">
               <span>User Name: {agencyData.username}</span>
