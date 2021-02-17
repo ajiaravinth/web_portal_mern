@@ -7,7 +7,13 @@ import { BiSortAZ, BiSortZA } from "react-icons/bi";
 import { NodeURL } from "../../api/api";
 
 const ArchiveAgencyList = (props) => {
-  const { sort, getAgencyDetails, isDeleteAgency, values } = props;
+  const {
+    sort,
+    getAgencyDetails,
+    getImagePreview,
+    isDeleteAgency,
+    values,
+  } = props;
 
   const sortIcon =
     values.sortOrder === null ? (
@@ -75,6 +81,7 @@ const ArchiveAgencyList = (props) => {
                       alt={`${item.agency_name[i]}`}
                       width="50px"
                       height="50px"
+                      onClick={() => getImagePreview(item._id)}
                     />
                   }
                 </td>

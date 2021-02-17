@@ -76,11 +76,12 @@ module.exports = (app, io) => {
       agencies.archive_agency_list
     );
     app.post("/agency/remove", ensureAuthorized, agencies.permenent_delete);
-    app.post(
-      "/agency/remove/all",
-      ensureAuthorized,
-      agencies.permenent_delete_all
-    );
+    // app.post(
+    //   "/agency/remove/all",
+    //   ensureAuthorized,
+    //   agencies.permenent_delete_all
+    // );
+    app.post("/image/preview", ensureAuthorized, agencies.image_preview);
   } catch (error) {
     console.log(error);
   }

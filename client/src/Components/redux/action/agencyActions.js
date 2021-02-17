@@ -1,4 +1,8 @@
-import { AGENCY_DETAILS_SAVE, AGENCY_REGISTER } from "./action-types";
+import {
+  AGENCY_DETAILS_SAVE,
+  AGENCY_REGISTER,
+  IMAGE_PREVIEW,
+} from "./action-types";
 
 export const agency_register = (formData, props) => {
   return {
@@ -13,5 +17,12 @@ export const agency_details_save = (formData, props) => {
     type: AGENCY_DETAILS_SAVE,
     formData,
     props,
+  };
+};
+
+export const image_preview = (id) => {
+  return {
+    type: IMAGE_PREVIEW,
+    id,
   };
 };

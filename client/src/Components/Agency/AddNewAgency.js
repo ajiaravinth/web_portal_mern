@@ -218,7 +218,8 @@ const AddNewAgency = (props) => {
   return (
     <div className="container">
       <ToastContainer autoClose={1500} />
-      <h5>Add New Agency</h5>
+      <h3 className="mt-4">Add New Agency</h3>
+      <hr />
       <AvForm onValidSubmit={formSubmit}>
         <Row>
           {/* Name */}

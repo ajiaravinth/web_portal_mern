@@ -4,6 +4,7 @@ import AdminProfile from "../Dashboard/AdminProfile";
 import AddNewAgency from "../Agency/AddNewAgency";
 import Dashboard from "../Dashboard/Dashboard";
 import EditAgency from "../Agency/EditAgency";
+import DocumentDashboard from "../Document/DocumentDashboard";
 // import EditAgency from "../views/Agency/EditAgency";
 
 const Routing = () => {
@@ -33,6 +34,12 @@ const Routing = () => {
           exact
           path="/agency/profile/edit"
           component={EditAgency}
+          auth={authUser}
+        />
+        <PrivateRoute
+          exact
+          path="/document"
+          component={DocumentDashboard}
           auth={authUser}
         />
       </Switch>

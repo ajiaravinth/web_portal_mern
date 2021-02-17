@@ -13,6 +13,7 @@ const AgencyList = (props) => {
     getAgencyDetails,
     isDeleteAgency,
     archiveAgency,
+    getImagePreview,
   } = props;
 
   const sortIcon =
@@ -82,6 +83,7 @@ const AgencyList = (props) => {
                       alt={`${item.agency_name[i]}`}
                       width="50px"
                       height="50px"
+                      onClick={() => getImagePreview(item._id)}
                     />
                   }
                 </td>

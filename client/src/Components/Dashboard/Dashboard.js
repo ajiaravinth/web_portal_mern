@@ -24,6 +24,7 @@ import ViewAgency from "../Agency/ViewAgency";
 import DeletedAgencyList from "../Agency/DeletedAgencyList";
 import DeleteModal from "../Common/DeleteModal";
 import ArchiveAgencyList from "../Agency/ArchivedAgencyList";
+import ImgPreviewModal from "../Common/ImgPreviewModal";
 
 const Dashboard = (props) => {
   // const state = {
@@ -84,29 +85,42 @@ const Dashboard = (props) => {
   //     },
   //   ],
   // };
+
   const state = useSelector((state) => state.agencyReducer);
   const dispatch = useDispatch();
   const [values, setvalues] = useState(state);
   const [agencyData, setagencyData] = useState([]);
   const [name, setName] = useState("");
+
   const [totalCount, settotalCount] = useState("");
   const [deletedCount, setdeletedCount] = useState(0);
-  const [deletId, setDeleteId] = useState("");
   const [archiveCount, setarchiveCount] = useState(0);
+
+  const [deletId, setDeleteId] = useState("");
   const [userId, setUserId] = useState("");
+
   const [isShow, setIsShow] = useState(true);
   const [isDeletedShow, setIsDeletedShow] = useState(false);
   const [isArchiveShow, setIsArchiveShow] = useState(false);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdowntoggle = () => setDropdownOpen((prevState) => !prevState);
+
   // View Modal
   const [viewModal, setViewModal] = useState(values.modal);
   const toggle = () => setViewModal(!viewModal);
+
   // Delete Confirmation Modal
   const [isDeleteModal, setisDeleteModal] = useState(false);
   const toggleDeleteModal = () => setisDeleteModal(!isDeleteModal);
   const authCheck = localStorage.getItem("authToken");
+
+  // Image Preview
+  const [previewImg, setpreviewImg] = useState("");
+  const [isImgPreview, setisImgPreview] = useState(false);
+  const previewtoggle = () => {
+    setisImgPreview(!isImgPreview);
+  };
 
   const populateData = () => {
     request({
@@ -535,13 +549,37 @@ const Dashboard = (props) => {
       .catch((error) => console.log(error));
   };
 
+  const getImagePreview = (id) => {
+    request({
+      url: "/image/preview",
+      method: "POST",
+      data: { id: id },
+    })
+      .then((res) => {
+        if (res.status === 0) {
+          toast.error(res.response);
+        }
+        if (res.status === 1) {
+          setpreviewImg(res.response);
+          setisImgPreview(true);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="container">
       <div style={{ textAlign: "center", marginTop: "2em" }}>
         <ToastContainer autoClose={1500} />
         <div className="header">
           <div style={{ marginRight: "1em" }}>
-            <Button color="success" onClick={populateData}>
+            <Button
+              color="warning"
+              onClick={() => props.history.push("/document")}
+            >
+              Documents
+            </Button>
+            <Button color="success" onClick={populateData} className="ml-3">
               Agencies
             </Button>
             <Button
@@ -688,8 +726,8 @@ const Dashboard = (props) => {
               sort={sort}
               getAgencyDetails={getAgencyDetails}
               isDeleteAgency={isDeleteAgency}
+              getImagePreview={getImagePreview}
               archiveAgency={archiveAgency}
-              // agencyData={agencyData}
             />
           ) : (
             ""
@@ -701,6 +739,7 @@ const Dashboard = (props) => {
                 sort={sort}
                 getAgencyDetails={getAgencyDetails}
                 getRemoveAgency={removeAgency}
+                getImagePreview={getImagePreview}
                 {...props}
               />
             </div>
@@ -714,6 +753,7 @@ const Dashboard = (props) => {
                 sort={sort}
                 getAgencyDetails={getAgencyDetails}
                 isDeleteAgency={isDeleteAgency}
+                getImagePreview={getImagePreview}
                 {...props}
               />
             </div>
@@ -765,6 +805,13 @@ const Dashboard = (props) => {
           ) : (
             ""
           )}
+          {isImgPreview ? (
+            <ImgPreviewModal
+              modal={isImgPreview}
+              toggle={previewtoggle}
+              logo_path={previewImg}
+            />
+          ) : null}
         </div>
       </div>
     </div>

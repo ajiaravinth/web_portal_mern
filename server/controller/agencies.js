@@ -110,13 +110,13 @@ module.exports = () => {
     ) {
       return res.json({
         status: 0,
-        respons: "Username already exsist!",
+        response: "Username already exsist!",
       });
     }
 
     let agecyRegister = await db.InsertDocs("agencies", agency);
     if (!agecyRegister) {
-      data.respons = "Username/Email is already Exists";
+      data.response = "Username/Email is already Exists";
       res.send(data);
     } else {
       const message = "New Agency Registered!";
@@ -126,7 +126,7 @@ module.exports = () => {
       };
       return res.json({
         status: 1,
-        respons: agecyRegister,
+        response: agecyRegister,
         message: message,
         options: options,
       });
@@ -160,7 +160,6 @@ module.exports = () => {
   router.agency_details_save = async (req, res) => {
     let data = {};
     data.status = 0;
-
     req.checkBody("username", "Invalid Username").notEmpty();
     req.checkBody("email", "Invalid Email").notEmpty();
     req.checkBody("name", "Invalid Name").notEmpty();
@@ -665,12 +664,42 @@ module.exports = () => {
     if (!docData) {
       res.json({
         status: 0,
-        respons: "Can't Delete this agency",
+        response: "Can't Delete this agency",
       });
     } else {
       res.json({
         status: 1,
-        respons: "agency deleted!!",
+        response: "agency deleted!!",
+      });
+    }
+  };
+
+  router.image_preview = async (req, res) => {
+    const data = {};
+    data.status = 0;
+    req.checkBody("id", "Invalid ID").notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      data.response = errors[0].msg;
+      return res.send(data);
+    }
+
+    const docData = await db.GetOneDoc(
+      "agencies",
+      { _id: req.body.id },
+      { agency_logo: 1 },
+      {}
+    );
+    if (!docData) {
+      res.json({
+        status: 0,
+        response: "Image Not Found!!",
+      });
+    }
+    if (docData) {
+      res.json({
+        status: 1,
+        response: docData,
       });
     }
   };

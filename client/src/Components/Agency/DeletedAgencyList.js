@@ -5,7 +5,13 @@ import { BiSortAZ, BiSortZA } from "react-icons/bi";
 import { NodeURL } from "../../api/api";
 
 const DeletedAgencyList = (props) => {
-  const { sort, getAgencyDetails, getRemoveAgency, values } = props;
+  const {
+    sort,
+    getAgencyDetails,
+    getRemoveAgency,
+    getImagePreview,
+    values,
+  } = props;
 
   const sortIcon =
     values.sortOrder === null ? (
@@ -73,6 +79,7 @@ const DeletedAgencyList = (props) => {
                       alt={`${item.agency_name[i]}`}
                       width="50px"
                       height="50px"
+                      onClick={() => getImagePreview(item._id)}
                     />
                   }
                 </td>

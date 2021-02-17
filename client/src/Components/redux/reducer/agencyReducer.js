@@ -1,6 +1,10 @@
+import { IMAGE_PREVIEW } from "../action/action-types";
+import request from "../../../api/api";
+
 const initialState = {
   tableData: [],
   agencyData: {},
+  agency_logo: "",
   modal: false,
   filterLocationList: [
     { value: "", label: "Select Country" },
