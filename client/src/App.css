@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.phoneInput input[type="tel"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 2.5em;
+  width: 34em;
+}
+
+.diffListCount {
+  border: 1px solid #ccc;
+  width: 75%;
+  margin: auto;
+  height: 75px;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 9px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: center;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.active {
+  /* border: 1px solid #000; */
+  transform: scale(1.05);
+  color: #000 !important;
+}

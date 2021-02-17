@@ -1,0 +1,8 @@
+{
+  "port": "1001",
+  "mongodb": {
+    "host": "localhost",
+    "port": "27017",
+    "db": "web_portal_db"
+  }
+}

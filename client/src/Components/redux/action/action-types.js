@@ -1,0 +1,16 @@
+export const LOGIN = "LOGIN";
+export const REGISTER = "REGISTER";
+export const LOGOUT = "LOGOUT";
+export const ADMIN_PROFILE = "ADMIN_PROFILE";
+export const ADMIN_PROFILE_SAVE = "ADMIN_PROFILE_SAVE";
+
+// Agency Actions
+export const AGENCY_REGISTER = "AGENCY_REGISTER";
+export const AGENCY_DETAILS = "AGENCY_DETAILS";
+export const AGENCY_DETAILS_SAVE = "AGENCY_DETAILS_SAVE";
+export const UPDATE_AGENCY = "UPDATE_AGENCY";
+export const DELETE_AGENCY = "DELETE_AGENCY";
+export const ARCHIVE_AGENCY = "ARCHIVE_AGENCY";
+export const AGENCY_LIST = "AGENCY_LIST";
+export const DELETED_AGENCY_LIST = "DELETED_AGENCY_LIST";
+export const ARCHIVE_AGENCY_LIST = "ARCHIVE_AGENCY_LIST";
