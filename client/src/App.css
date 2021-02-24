@@ -27,7 +27,40 @@
 }
 
 .active {
-  /* border: 1px solid #000; */
   transform: scale(1.05);
   color: #000 !important;
+}
+
+.fileInputContainer {
+  width: 50%;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.previewBox {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 50%;
+  margin: auto;
+  height: 250px;
+  overflow: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  padding: 1em;
+}
+
+.imageContainer {
+  position: relative;
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+}
+
+span.removeBtn {
+  position: absolute;
+  top: -7px;
+  right: 2px;
+  color: red;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
 }

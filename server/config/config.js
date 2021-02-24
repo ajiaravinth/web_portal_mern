@@ -13,5 +13,6 @@ CONFIG.SECRET_KEY =
   "fZwLwG7QmKnYbhQilnTjhcHhWJ8Va3VfTfOdMLTWk5IlcptmAavHc0MXzJGzArChxhk7Q2";
 CONFIG.DIRECTORY_AGENY = "./uploads/images/agency/";
 CONFIG.DIRECTORY_EMPLOYEE = "./uploads/images/employee/";
+CONFIG.DIRECTORY_DOCUMENTS = "./uploads/images/documents/";
 
 module.exports = CONFIG;

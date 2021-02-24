@@ -11,6 +11,8 @@
     "bootstrap": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.20",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dates": "^21.8.0",
     "react-datetime": "^3.0.4",

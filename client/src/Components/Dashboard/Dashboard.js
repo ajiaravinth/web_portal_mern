@@ -92,7 +92,7 @@ const Dashboard = (props) => {
   const [agencyData, setagencyData] = useState([]);
   const [name, setName] = useState("");
 
-  const [totalCount, settotalCount] = useState("");
+  const [totalCount, settotalCount] = useState(0);
   const [deletedCount, setdeletedCount] = useState(0);
   const [archiveCount, setarchiveCount] = useState(0);
 
@@ -567,18 +567,25 @@ const Dashboard = (props) => {
       .catch((error) => console.log(error));
   };
 
+  const gotoDocumentpage = (id) => {
+    props.history.push({
+      pathname: "/document",
+      state: { id: id },
+    });
+  };
+
   return (
     <div className="container">
       <div style={{ textAlign: "center", marginTop: "2em" }}>
         <ToastContainer autoClose={1500} />
         <div className="header">
           <div style={{ marginRight: "1em" }}>
-            <Button
+            {/* <Button
               color="warning"
               onClick={() => props.history.push("/document")}
             >
               Documents
-            </Button>
+            </Button> */}
             <Button color="success" onClick={populateData} className="ml-3">
               Agencies
             </Button>
@@ -728,6 +735,7 @@ const Dashboard = (props) => {
               isDeleteAgency={isDeleteAgency}
               getImagePreview={getImagePreview}
               archiveAgency={archiveAgency}
+              gotoDocumentpage={gotoDocumentpage}
             />
           ) : (
             ""

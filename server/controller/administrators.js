@@ -71,6 +71,7 @@ module.exports = () => {
       return res.json({
         status: 1,
         response: "Registered successfully.",
+        z,
       });
     } else {
       return res.json({

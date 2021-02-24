@@ -4,6 +4,7 @@ module.exports = (app, passport, io) => {
   try {
     require("./administrators")(app, io);
     require("./agencies")(app, io);
+    require("./documents")(app, io);
 
     app.get("/", (req, res) => {
       res.sendFile(path.join(__dirname, "../public/index.html"));

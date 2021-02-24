@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEye, AiOutlineCloudUpload } from "react-icons/ai";
 import { FaTrashAlt, FaFileArchive } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { BiSortAZ, BiSortZA } from "react-icons/bi";
@@ -14,6 +14,7 @@ const AgencyList = (props) => {
     isDeleteAgency,
     archiveAgency,
     getImagePreview,
+    gotoDocumentpage,
   } = props;
 
   const sortIcon =
@@ -27,7 +28,7 @@ const AgencyList = (props) => {
 
   return (
     <div>
-      <Table hover>
+      <Table hover responsive>
         <thead>
           <tr>
             <th>S.No</th>
@@ -121,6 +122,12 @@ const AgencyList = (props) => {
                       onClick={() => archiveAgency(item._id)}
                     >
                       <FaFileArchive />
+                    </span>
+                    <span
+                      style={{ color: "res" }}
+                      onClick={() => gotoDocumentpage(item._id)}
+                    >
+                      <AiOutlineCloudUpload />
                     </span>
                   </div>
                   {/* {item.actions && item.actions.length > 0 && ( 
