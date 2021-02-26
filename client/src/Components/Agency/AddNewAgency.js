@@ -8,15 +8,7 @@ import {
   AvCheckboxGroup,
   AvCheckbox,
 } from "availity-reactstrap-validation";
-import {
-  Button,
-  Label,
-  FormGroup,
-  Row,
-  Col,
-  Input,
-  CustomInput,
-} from "reactstrap";
+import { Button, Label, FormGroup, Row, Col, CustomInput } from "reactstrap";
 import IntlTelInput from "react-intl-tel-input";
 import { libphonenumber } from "react-intl-tel-input/dist";
 import Datetime from "react-datetime";

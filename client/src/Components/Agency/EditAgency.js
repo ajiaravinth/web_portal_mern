@@ -558,6 +558,7 @@ const EditAgency = (props) => {
                     width="100px"
                     height="100px"
                     onClick={() => getImagePreview(values.id)}
+                    alt="agency_logo"
                   />
                 </FormGroup>
               </FormGroup>

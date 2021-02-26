@@ -81,6 +81,9 @@ mongoose.connection.on("connected", () => {
   });
   app.use(cors({ origin: true, credentials: true }));
   require("./routes")(app, io);
+  require("./cron")(io);
+
+  app.get("/reminder/set", (req, res) => console.log(req.body, "req"));
 
   try {
     server.listen(CONFIG.PORT, () =>

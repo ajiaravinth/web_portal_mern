@@ -1,6 +1,3 @@
-import { IMAGE_PREVIEW } from "../action/action-types";
-import request from "../../../api/api";
-
 const initialState = {
   tableData: [],
   agencyData: {},

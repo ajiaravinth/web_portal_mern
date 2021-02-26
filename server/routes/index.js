@@ -5,6 +5,7 @@ module.exports = (app, passport, io) => {
     require("./administrators")(app, io);
     require("./agencies")(app, io);
     require("./documents")(app, io);
+    require("./reminders")(app, io);
 
     app.get("/", (req, res) => {
       res.sendFile(path.join(__dirname, "../public/index.html"));

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import AvField from "availity-reactstrap-validation/lib/AvField";
 import AvGroup from "availity-reactstrap-validation/lib/AvGroup";
 import AvForm from "availity-reactstrap-validation/lib/AvForm";

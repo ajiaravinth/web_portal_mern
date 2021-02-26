@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { NodeURL } from "../../api/api";
 
 const ImgPreviewModal = (props) => {

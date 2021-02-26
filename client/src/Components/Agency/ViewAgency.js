@@ -5,8 +5,6 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Row,
-  Col,
   Table,
 } from "reactstrap";
 
