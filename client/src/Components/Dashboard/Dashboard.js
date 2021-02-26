@@ -580,12 +580,12 @@ const Dashboard = (props) => {
         <ToastContainer autoClose={1500} />
         <div className="header">
           <div style={{ marginRight: "1em" }}>
-            {/* <Button
+            <Button
               color="warning"
-              onClick={() => props.history.push("/document")}
+              onClick={() => props.history.push("/reminder")}
             >
-              Documents
-            </Button> */}
+              Set Reminder
+            </Button>
             <Button color="success" onClick={populateData} className="ml-3">
               Agencies
             </Button>

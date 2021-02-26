@@ -5,7 +5,7 @@ import AddNewAgency from "../Agency/AddNewAgency";
 import Dashboard from "../Dashboard/Dashboard";
 import EditAgency from "../Agency/EditAgency";
 import DocumentDashboard from "../Document/DocumentDashboard";
-// import EditAgency from "../views/Agency/EditAgency";
+import ReminderPage from "../Reminder/ReminderPage";
 
 const Routing = () => {
   let authUser = localStorage.getItem("authToken");
@@ -40,6 +40,12 @@ const Routing = () => {
           exact
           path="/document"
           component={DocumentDashboard}
+          auth={authUser}
+        />
+        <PrivateRoute
+          exact
+          path="/reminder"
+          component={ReminderPage}
           auth={authUser}
         />
       </Switch>
