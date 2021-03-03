@@ -2,6 +2,8 @@ let mongoose = require("mongoose");
 let reminderSchema = mongoose.Schema(
   {
     status: Number,
+    reminder_status: Number,
+    snooze_status: Number,
     start: Date,
     // end: Date,
     reminder: Date,

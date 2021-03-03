@@ -13,9 +13,9 @@ const express = require("express"),
   i18n = require("i18n"),
   CONFIG = require("./config/config");
 
-const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+var app = express();
+var server = require("http").createServer(app);
+var io = require("socket.io")(server, { transports: ["polling", "websocket"] });
 // io.set("transports", ["websocket"]);
 
 global.GLOBAL_CONFIG = {};
@@ -34,6 +34,7 @@ mongoose.connect(CONFIG.DB_URL, {
   useFindAndModify: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 mongoose.connection.on("error", (error) =>
   console.error("Error in MongoDb connection: " + error)
@@ -80,7 +81,8 @@ mongoose.connection.on("connected", () => {
     next();
   });
   app.use(cors({ origin: true, credentials: true }));
-  require("./routes")(app, io);
+  require("./routes")(app, passport, io);
+  require("./sockets")(io);
   require("./cron")(io);
 
   app.get("/reminder/set", (req, res) => console.log(req.body, "req"));

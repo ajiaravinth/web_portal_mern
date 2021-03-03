@@ -4,6 +4,7 @@ module.exports = (app, passport, io) => {
   try {
     require("./administrators")(app, io);
     require("./agencies")(app, io);
+    require("./employees")(app, io);
     require("./documents")(app, io);
     require("./reminders")(app, io);
 

@@ -27,6 +27,7 @@ let ensureAuthorized = async (req, res, next) => {
           });
         }
         if (auth_check) {
+          // console.log(auth_check, "auth_check");
           req.params.loginId = auth_check._id;
           req.params.loginData = auth_check;
           next();

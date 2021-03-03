@@ -71,13 +71,21 @@ const AgencyList = (props) => {
           {values.tableData &&
             values.tableData.length > 0 &&
             values.tableData.map((item, i) => (
-              <tr key={i}>
+              <tr
+                key={i}
+                onClick={() =>
+                  props.history.push({
+                    pathname: "/employees",
+                    state: { agencyId: item._id },
+                  })
+                }
+              >
                 <td>{i + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone.code + item.phone.number}</td>
                 <td>{item.agency_name}</td>
-                <td>
+                <td onClick={(e) => e.stopPropagation()}>
                   {
                     <img
                       src={`${NodeURL}${item.agency_logo}`}
@@ -91,7 +99,7 @@ const AgencyList = (props) => {
                 <td>{item.address.state}</td>
                 <td>{item.address.country}</td>
                 <td>{item.address.zipcode}</td>
-                <td>
+                <td onClick={(e) => e.stopPropagation()}>
                   <div
                     style={{
                       display: "flex",

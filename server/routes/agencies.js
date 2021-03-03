@@ -43,6 +43,7 @@ let ensureAuthorized = async (req, res, next) => {
 
 module.exports = (app, io) => {
   const agencies = require("../controller/agencies")(app, io);
+  // console.log(io, "io-admin");
   try {
     app.post(
       "/register/agency",

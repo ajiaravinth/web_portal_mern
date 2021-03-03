@@ -1,7 +1,10 @@
-.header {
+/* .header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+} */
+li.nav-item {
+  cursor: pointer;
 }
 
 .phoneInput input[type="tel"] {

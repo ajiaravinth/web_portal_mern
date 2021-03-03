@@ -6,10 +6,19 @@ import request from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
   Dropdown,
+  UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  NavbarText,
   Row,
   Col,
   Input,
@@ -121,6 +130,10 @@ const Dashboard = (props) => {
   const previewtoggle = () => {
     setisImgPreview(!isImgPreview);
   };
+
+  // navbar dropdown
+  const [isOpen, setIsOpen] = useState(false);
+  const navbartoggle = () => setIsOpen(!isOpen);
 
   const populateData = () => {
     request({
@@ -579,13 +592,46 @@ const Dashboard = (props) => {
       <div style={{ textAlign: "center", marginTop: "2em" }}>
         <ToastContainer autoClose={1500} />
         <div className="header">
-          <div style={{ marginRight: "1em" }}>
-            <Button
-              color="warning"
-              onClick={() => props.history.push("/reminder")}
-            >
-              Set Reminder
-            </Button>
+          <Navbar color="light" light expand="md">
+            {/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
+            <NavbarToggler onClick={navbartoggle} />
+            <Collapse isOpen={isOpen} navbar>
+              <Nav className="ml-auto" navbar>
+                <NavItem>
+                  <NavLink onClick={populateData}>Agencies</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink onClick={() => props.history.push("/addagency")}>
+                    Add New Agency
+                  </NavLink>
+                </NavItem>
+                {/* <NavItem>
+                  <NavLink onClick={() => props.history.push("/employees")}>
+                    Employees
+                  </NavLink>
+                </NavItem> */}
+                <NavItem>
+                  <NavLink onClick={() => props.history.push("/reminder")}>
+                    Reminder
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <Nav>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    {name}
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem onClick={() => viewProfileData(userId)}>
+                      Profile
+                    </DropdownItem>
+                    <DropdownItem onClick={logoutHandler}>Logout</DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </Nav>
+            </Collapse>
+          </Navbar>
+          {/* <div style={{ marginRight: "1em" }}>
             <Button color="success" onClick={populateData} className="ml-3">
               Agencies
             </Button>
@@ -596,17 +642,30 @@ const Dashboard = (props) => {
             >
               Add New Agency
             </Button>
-          </div>
-          <Dropdown isOpen={dropdownOpen} toggle={dropdowntoggle}>
-            <DropdownToggle caret>{name}</DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={() => viewProfileData(userId)}>
-                Profile
-              </DropdownItem>
-              <DropdownItem onClick={logoutHandler}>Logout</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+            <Button
+              color="#000"
+              onClick={() => props.history.push("/reminder")}
+              className="ml-3"
+            >
+              Employees
+            </Button>
+            <Button
+              color="warning"
+              onClick={() => props.history.push("/reminder")}
+              className="ml-3"
+            >
+              Set Reminder
+            </Button> */}
         </div>
+        {/* <Dropdown isOpen={dropdownOpen} toggle={dropdowntoggle}>
+          <DropdownToggle caret>{name}</DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem onClick={() => viewProfileData(userId)}>
+              Profile
+            </DropdownItem>
+            <DropdownItem onClick={logoutHandler}>Logout</DropdownItem>
+          </DropdownMenu>
+        </Dropdown> */}
       </div>
       <div style={{ textAlign: "center", marginTop: "2em" }}>
         <h3>
@@ -736,6 +795,7 @@ const Dashboard = (props) => {
               getImagePreview={getImagePreview}
               archiveAgency={archiveAgency}
               gotoDocumentpage={gotoDocumentpage}
+              {...props}
             />
           ) : (
             ""

@@ -175,6 +175,18 @@ const InsertMultipleDocs = (model, docs) => {
   });
 };
 
+const findOneandUpdateDoc = (model, criteria, doc, options) => {
+  return new Promise((resolve, reject) => {
+    db[model].findOneAndUpdate(criteria, doc, options, (err, docs) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(docs);
+      }
+    });
+  });
+};
+
 module.exports = {
   GetDocs: GetDocs,
   GetOneDoc: GetOneDoc,
@@ -186,4 +198,5 @@ module.exports = {
   DeleteManyDocs: DeleteManyDocs,
   FindOneandUpdateDoc: FindOneandUpdateDoc,
   InsertMultipleDocs: InsertMultipleDocs,
+  findOneandUpdateDoc: findOneandUpdateDoc,
 };

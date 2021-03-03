@@ -1,5 +1,4 @@
 "use strict";
-
 const jwt = require("jsonwebtoken"),
   CONFIG = require("../config/config"),
   middlewares = require("../model/middlewares"),
@@ -40,15 +39,12 @@ let ensureAuthorized = async (req, res, next) => {
     });
   }
 };
-
 module.exports = (app, io) => {
-  const reminders = require("../controller/reminders")(app, io);
   try {
-    app.post("/reminder/set", ensureAuthorized, reminders.set_reminder);
-    app.get("/reminder/notify", ensureAuthorized, reminders.reminder_notify);
-    app.post("/reminder/close", ensureAuthorized, reminders.reminder_close);
-    app.post("/reminder/snooze", ensureAuthorized, reminders.reminder_snooze);
+    const employees = require("../controller/employees")(app, io);
+    app.get("/agency/list", ensureAuthorized, employees.get_all);
+    app.post("/agency/detail", ensureAuthorized, employees.agency_details);
   } catch (error) {
-    console.log(error);
+    console.log("Error in employees" + error);
   }
 };
