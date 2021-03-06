@@ -4,11 +4,12 @@ const employeeSchema = mongoose.Schema({
   last_name: String,
   username: String,
   email: String,
-  mobile_number: String,
+  phone: { code: String, number: String },
   worklocation: String,
   agencyid: String,
-  adminId: String,
-  employee_status: Number,
+  adminid: String,
+  employee_status: Boolean,
+  job_role: String,
   status: Number,
 });
 

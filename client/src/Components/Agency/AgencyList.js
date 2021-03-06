@@ -1,5 +1,10 @@
 import React from "react";
-import { Table } from "reactstrap";
+import {
+  Table,
+  UncontrolledDropdown,
+  DropdownMenu,
+  DropdownToggle,
+} from "reactstrap";
 import { AiFillEye, AiOutlineCloudUpload } from "react-icons/ai";
 import { FaTrashAlt, FaFileArchive } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
@@ -75,7 +80,7 @@ const AgencyList = (props) => {
                 key={i}
                 onClick={() =>
                   props.history.push({
-                    pathname: "/employees",
+                    pathname: `/agency/dashboard`,
                     state: { agencyId: item._id },
                   })
                 }
@@ -100,62 +105,63 @@ const AgencyList = (props) => {
                 <td>{item.address.country}</td>
                 <td>{item.address.zipcode}</td>
                 <td onClick={(e) => e.stopPropagation()}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      cursor: "pointer",
+                  <UncontrolledDropdown
+                    className="opt-changes"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
                     }}
                   >
-                    <span
-                      style={{ color: "#1b83ce" }}
-                      onClick={(e) => getAgencyDetails(e, item._id, "view")}
-                    >
-                      <AiFillEye />
-                    </span>
-                    <span
-                      style={{ color: "#21982b" }}
-                      onClick={(e) => getAgencyDetails(e, item._id, "edit")}
-                    >
-                      <FiEdit />
-                    </span>
-                    <span
-                      style={{ color: "#e83636c2" }}
-                      onClick={() => isDeleteAgency(item._id)}
-                    >
-                      <FaTrashAlt />
-                    </span>
-                    <span
-                      style={{ color: "#ffac2f" }}
-                      onClick={() => archiveAgency(item._id)}
-                    >
-                      <FaFileArchive />
-                    </span>
-                    <span
-                      style={{ color: "res" }}
-                      onClick={() => gotoDocumentpage(item._id)}
-                    >
-                      <AiOutlineCloudUpload />
-                    </span>
-                  </div>
-                  {/* {item.actions && item.actions.length > 0 && ( 
-                   {item.actions.map((action, i) => (
-                      <div key={i}>
-                        <span
-                          style={{ cursor: "pointer" }}
-                          id={`${action.name}${i}`}
+                    <DropdownToggle className="option-methods">
+                      <span>
+                        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+                      </span>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <div className="update-lists">
+                        <button
+                          type="button"
+                          title="view"
+                          className="btn"
+                          onClick={(e) => getAgencyDetails(e, item._id, "view")}
                         >
-                          {String(`<${action.icon} />`)}
-                        </span>
-                        <UncontrolledTooltip
-                          target={`${action.name}${i}`}
-                          placement="left"
+                          <AiFillEye color="#1d61cf" /> View
+                        </button>
+                        <button
+                          type="button"
+                          title="edit"
+                          className="btn"
+                          onClick={(e) => getAgencyDetails(e, item._id, "edit")}
                         >
-                          {action.tooltip}
-                        </UncontrolledTooltip>
+                          <FiEdit color="#2b9c21" /> Edit
+                        </button>
+                        <button
+                          type="button"
+                          title="delete"
+                          className="btn"
+                          onClick={() => isDeleteAgency(item._id)}
+                        >
+                          <FaTrashAlt color=" #ff4444" /> Delete
+                        </button>
+                        <button
+                          type="button"
+                          title="archive"
+                          className="btn"
+                          onClick={() => archiveAgency(item._id)}
+                        >
+                          <FaFileArchive color="#f5c000" /> Archive
+                        </button>
+                        <button
+                          type="button"
+                          title="fileupload"
+                          className="btn"
+                          onClick={() => gotoDocumentpage(item._id)}
+                        >
+                          <AiOutlineCloudUpload color="#ed26ff" /> File Upload
+                        </button>
                       </div>
-                    ))} 
-                   )} */}
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
                 </td>
               </tr>
             ))}

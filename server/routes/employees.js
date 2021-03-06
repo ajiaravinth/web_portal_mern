@@ -1,7 +1,6 @@
 "use strict";
 const jwt = require("jsonwebtoken"),
   CONFIG = require("../config/config"),
-  middlewares = require("../model/middlewares"),
   db = require("../model/mongodb");
 
 let ensureAuthorized = async (req, res, next) => {
@@ -39,11 +38,14 @@ let ensureAuthorized = async (req, res, next) => {
     });
   }
 };
+
 module.exports = (app, io) => {
   try {
     const employees = require("../controller/employees")(app, io);
-    app.get("/agency/list", ensureAuthorized, employees.get_all);
+    app.get("/employees/name_list", ensureAuthorized, employees.get_all);
     app.post("/agency/detail", ensureAuthorized, employees.agency_details);
+    app.post("/employee/add", ensureAuthorized, employees.add_employee);
+    app.post("/employees/list", ensureAuthorized, employees.employees_list);
   } catch (error) {
     console.log("Error in employees" + error);
   }

@@ -5,20 +5,16 @@ import moment from "moment";
 import request from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Button,
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
-  Dropdown,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText,
   Row,
   Col,
   Input,
@@ -36,65 +32,7 @@ import ArchiveAgencyList from "../Agency/ArchivedAgencyList";
 import ImgPreviewModal from "../Common/ImgPreviewModal";
 
 const Dashboard = (props) => {
-  // const state = {
-  //   tableData: [],
-  //   filterLocationList: [
-  //     { value: "", label: "Select Country" },
-  //     { value: "india", label: "India" },
-  //     { value: "united-states", label: "United States" },
-  //     { value: "brazil", label: "Brazil" },
-  //     { value: "france", label: "France" },
-  //   ],
-  //   filterLocation: "",
-  //   activePage: 1,
-  //   activeTab: "1",
-  //   pages: 0,
-  //   pageRangeDisplayed: 4,
-  //   currPage: 5,
-  //   remainingEmp: 0,
-  //   sortOrder: false,
-  //   tableOptions: {
-  //     search: "",
-  //     filter: "all",
-  //     page: {
-  //       history: "",
-  //       current: 1,
-  //     },
-  //     order: -1,
-  //     field: "createdAt",
-  //     limit: 5,
-  //     skip: 0,
-  //     to_date: "",
-  //     from_date: "",
-  //   },
-  //   fromDate: "",
-  //   toDate: "",
-  //   pageRange: [
-  //     {
-  //       label: "5",
-  //       value: 5,
-  //     },
-  //   ],
-  //   pageRangeList: [
-  //     {
-  //       label: "5",
-  //       value: 5,
-  //     },
-  //     {
-  //       label: "10",
-  //       value: 10,
-  //     },
-  //     {
-  //       label: "15",
-  //       value: 15,
-  //     },
-  //     {
-  //       label: "20",
-  //       value: 20,
-  //     },
-  //   ],
-  // };
-
+  
   const state = useSelector((state) => state.agencyReducer);
   const dispatch = useDispatch();
   const [values, setvalues] = useState(state);
@@ -593,7 +531,6 @@ const Dashboard = (props) => {
         <ToastContainer autoClose={1500} />
         <div className="header">
           <Navbar color="light" light expand="md">
-            {/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
             <NavbarToggler onClick={navbartoggle} />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
@@ -605,11 +542,6 @@ const Dashboard = (props) => {
                     Add New Agency
                   </NavLink>
                 </NavItem>
-                {/* <NavItem>
-                  <NavLink onClick={() => props.history.push("/employees")}>
-                    Employees
-                  </NavLink>
-                </NavItem> */}
                 <NavItem>
                   <NavLink onClick={() => props.history.push("/reminder")}>
                     Reminder
@@ -631,41 +563,7 @@ const Dashboard = (props) => {
               </Nav>
             </Collapse>
           </Navbar>
-          {/* <div style={{ marginRight: "1em" }}>
-            <Button color="success" onClick={populateData} className="ml-3">
-              Agencies
-            </Button>
-            <Button
-              color="primary"
-              onClick={() => props.history.push("/addagency")}
-              className="ml-3"
-            >
-              Add New Agency
-            </Button>
-            <Button
-              color="#000"
-              onClick={() => props.history.push("/reminder")}
-              className="ml-3"
-            >
-              Employees
-            </Button>
-            <Button
-              color="warning"
-              onClick={() => props.history.push("/reminder")}
-              className="ml-3"
-            >
-              Set Reminder
-            </Button> */}
         </div>
-        {/* <Dropdown isOpen={dropdownOpen} toggle={dropdowntoggle}>
-          <DropdownToggle caret>{name}</DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={() => viewProfileData(userId)}>
-              Profile
-            </DropdownItem>
-            <DropdownItem onClick={logoutHandler}>Logout</DropdownItem>
-          </DropdownMenu>
-        </Dropdown> */}
       </div>
       <div style={{ textAlign: "center", marginTop: "2em" }}>
         <h3>

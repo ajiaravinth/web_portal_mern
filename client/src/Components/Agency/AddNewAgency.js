@@ -179,7 +179,6 @@ const AddNewAgency = (props) => {
   };
 
   const formSubmit = (e) => {
-    console.log(values.language, "lang");
     e.preventDefault();
     let data = new FormData();
     data.append("username", values.username);

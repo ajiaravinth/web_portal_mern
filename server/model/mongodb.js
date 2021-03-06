@@ -2,12 +2,14 @@ const administrators = require("../schema/administrators");
 const agencies = require("../schema/agencies");
 const documents = require("../schema/documents");
 const reminders = require("../schema/reminders");
+const employees = require("../schema/employees");
 
 const db = {
   administrators: administrators,
   agencies: agencies,
   documents: documents,
   reminders: reminders,
+  employees: employees,
 };
 
 const GetOneDoc = (model, query, projection, extension) => {

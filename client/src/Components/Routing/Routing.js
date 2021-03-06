@@ -6,8 +6,8 @@ import Dashboard from "../Dashboard/Dashboard";
 import EditAgency from "../Agency/EditAgency";
 import DocumentDashboard from "../Document/DocumentDashboard";
 import ReminderPage from "../Reminder/ReminderPage";
-import EmployeesDashboard from "../Employees/EmployeesDashboard";
 import AddEmployee from "../Employees/AddEmployee";
+import AgencyDashboard from "../Employees/AgencyDashboard";
 
 const Routing = () => {
   let authUser = localStorage.getItem("authToken");
@@ -52,8 +52,8 @@ const Routing = () => {
         />
         <PrivateRoute
           exact
-          path="/employees"
-          component={EmployeesDashboard}
+          path="/agency/dashboard"
+          component={AgencyDashboard}
           auth={authUser}
         />
         <PrivateRoute

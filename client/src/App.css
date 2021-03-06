@@ -7,11 +7,27 @@ li.nav-item {
   cursor: pointer;
 }
 
-.phoneInput input[type="tel"] {
-  border: 1px solid #ccc;
+.allow-dropdown.intl-tel-input {
+  width: 100% !important;
+  border: 1px solid #ced4da;
   border-radius: 5px;
   height: 2.5em;
-  width: 34em;
+}
+
+.intl-tel-input.allow-dropdown input[type="tel"] {
+  border: none;
+  width: 100%;
+  padding-top: 6px;
+  color: hsl(0, 0%, 20%);
+  outline: none !important;
+}
+
+.intl-tel-input.allow-dropdown .selected-flag {
+  outline: none;
+}
+
+.iti-flag.in {
+  outline: none;
 }
 
 .diffListCount {
@@ -66,4 +82,59 @@ span.removeBtn {
   font-size: 1.2rem;
   font-weight: 900;
   cursor: pointer;
+}
+
+td.hvs-ranges {
+  width: 150px;
+  display: inline-block;
+}
+.opt-changes button.option-methods {
+  border: 0;
+  background-color: transparent;
+  color: #9e9e9e;
+  padding: 0 20px;
+  font-size: 16px;
+  display: none;
+  border-radius: 0px;
+}
+tbody tr:hover td button.option-methods {
+  display: block;
+}
+.update-lists button.view-table {
+  width: 100%;
+  display: flex;
+  line-height: 9px;
+  display: block;
+  border-bottom: 1px solid #dddddd63;
+  color: #707070;
+  font-size: 1rem !important;
+  text-align: left;
+  border: 0;
+  padding: 7px;
+  border-color: #ffffff !important;
+}
+.btn-secondary:focus,
+.btn-secondary.focus,
+button:focus,
+button.focus {
+  box-shadow: 0px 0px 0px transparent;
+}
+.opt-changes .dropdown-menu.show {
+  width: 100px !important;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  border: 0;
+}
+.update-lists button {
+  width: 100%;
+  display: flex;
+  line-height: 9px;
+  display: block;
+  border-bottom: 1px solid #dddddd63;
+  color: #707070;
+  font-size: 1rem !important;
+  text-align: left;
+  border: 0;
+  padding: 7px !important;
+  border-color: #ffffff !important;
 }
