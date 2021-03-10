@@ -43,7 +43,6 @@ let ensureAuthorized = async (req, res, next) => {
 
 module.exports = (app, io) => {
   const agencies = require("../controller/agencies")(app, io);
-  // console.log(io, "io-admin");
   try {
     app.post(
       "/register/agency",
@@ -77,11 +76,7 @@ module.exports = (app, io) => {
       agencies.archive_agency_list
     );
     app.post("/agency/remove", ensureAuthorized, agencies.permenent_delete);
-    // app.post(
-    //   "/agency/remove/all",
-    //   ensureAuthorized,
-    //   agencies.permenent_delete_all
-    // );
+    app.post("/agency/restore", ensureAuthorized, agencies.agency_restore);
     app.post("/image/preview", ensureAuthorized, agencies.image_preview);
   } catch (error) {
     console.log(error);

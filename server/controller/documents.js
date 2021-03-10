@@ -86,7 +86,6 @@ module.exports = () => {
   };
 
   router.document_delete = async (req, res) => {
-    console.log(req.body.id, req.body.doc_id, "req");
     let get_doc = await db.GetOneDoc(
       "documents",
       { agency_id: req.body.id },

@@ -6,7 +6,7 @@ import {
   DropdownToggle,
 } from "reactstrap";
 import { AiFillEye, AiOutlineCloudUpload } from "react-icons/ai";
-import { FaTrashAlt, FaFileArchive } from "react-icons/fa";
+import { FaTrashAlt, FaFileArchive, FaEllipsisV } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { BiSortAZ, BiSortZA } from "react-icons/bi";
 import { NodeURL } from "../../api/api";
@@ -78,6 +78,7 @@ const AgencyList = (props) => {
             values.tableData.map((item, i) => (
               <tr
                 key={i}
+                style={{ cursor: "pointer" }}
                 onClick={() =>
                   props.history.push({
                     pathname: `/agency/dashboard`,
@@ -95,8 +96,8 @@ const AgencyList = (props) => {
                     <img
                       src={`${NodeURL}${item.agency_logo}`}
                       alt={`${item.agency_name[i]}`}
-                      width="50px"
-                      height="50px"
+                      width="30px"
+                      height="30px"
                       onClick={() => getImagePreview(item._id)}
                     />
                   }
@@ -114,7 +115,7 @@ const AgencyList = (props) => {
                   >
                     <DropdownToggle className="option-methods">
                       <span>
-                        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        <FaEllipsisV />
                       </span>
                     </DropdownToggle>
                     <DropdownMenu>
@@ -123,7 +124,7 @@ const AgencyList = (props) => {
                           type="button"
                           title="view"
                           className="btn"
-                          onClick={(e) => getAgencyDetails(e, item._id, "view")}
+                          onClick={(e) => getAgencyDetails(item._id, "view")}
                         >
                           <AiFillEye color="#1d61cf" /> View
                         </button>
@@ -131,7 +132,7 @@ const AgencyList = (props) => {
                           type="button"
                           title="edit"
                           className="btn"
-                          onClick={(e) => getAgencyDetails(e, item._id, "edit")}
+                          onClick={(e) => getAgencyDetails(item._id, "edit")}
                         >
                           <FiEdit color="#2b9c21" /> Edit
                         </button>
@@ -139,7 +140,7 @@ const AgencyList = (props) => {
                           type="button"
                           title="delete"
                           className="btn"
-                          onClick={() => isDeleteAgency(item._id)}
+                          onClick={() => isDeleteAgency(item._id, "trash")}
                         >
                           <FaTrashAlt color=" #ff4444" /> Delete
                         </button>

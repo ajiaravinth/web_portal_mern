@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import moment from "moment";
 import request from "../../api/api";
@@ -30,9 +29,10 @@ import DeletedAgencyList from "../Agency/DeletedAgencyList";
 import DeleteModal from "../Common/DeleteModal";
 import ArchiveAgencyList from "../Agency/ArchivedAgencyList";
 import ImgPreviewModal from "../Common/ImgPreviewModal";
+import RestoreModal from "../Common/RestoreModal";
+import { ToastContainer, toast } from "react-toastify";
 
 const Dashboard = (props) => {
-  
   const state = useSelector((state) => state.agencyReducer);
   const dispatch = useDispatch();
   const [values, setvalues] = useState(state);
@@ -50,15 +50,18 @@ const Dashboard = (props) => {
   const [isDeletedShow, setIsDeletedShow] = useState(false);
   const [isArchiveShow, setIsArchiveShow] = useState(false);
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdowntoggle = () => setDropdownOpen((prevState) => !prevState);
-
   // View Modal
   const [viewModal, setViewModal] = useState(values.modal);
   const toggle = () => setViewModal(!viewModal);
 
+  // Restore Agency
+  const [restore_id, setrestore_id] = useState("");
+  const [restorePopover, setrestorePopover] = useState(false);
+  const toggleRestoreModal = () => setrestorePopover(!restorePopover);
+
   // Delete Confirmation Modal
   const [isDeleteModal, setisDeleteModal] = useState(false);
+  const [isPermanentDelete, setisPermanentDelete] = useState(false);
   const toggleDeleteModal = () => setisDeleteModal(!isDeleteModal);
   const authCheck = localStorage.getItem("authToken");
 
@@ -296,7 +299,7 @@ const Dashboard = (props) => {
     });
   };
 
-  const getAgencyDetails = (e, id, action) => {
+  const getAgencyDetails = (id, action) => {
     if (action === "edit") {
       props.history.push({
         pathname: "/agency/profile/edit",
@@ -317,8 +320,11 @@ const Dashboard = (props) => {
     }
   };
 
-  const isDeleteAgency = (id) => {
-    setisDeleteModal(!isDeleteModal);
+  const isDeleteAgency = (id, key) => {
+    key === "trash" && setisDeleteModal(true);
+    setDeleteId(id);
+    key === "permanent" && setisPermanentDelete(true);
+    setisDeleteModal(true);
     setDeleteId(id);
   };
 
@@ -374,6 +380,52 @@ const Dashboard = (props) => {
           }
           deletedListAPI();
           archiveListAPI();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const removeAgency = (id) => {
+    request({
+      url: "/agency/remove",
+      method: "POST",
+      data: { id: id },
+    })
+      .then((res) => {
+        if (res.status === 0) {
+          toast.error(res.response);
+        }
+        if (res.status === 1) {
+          toast.success(res.response);
+          getDeletedList();
+          deletedListAPI();
+          toggleDeleteModal();
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const isRestore = (id) => {
+    setrestore_id(id);
+    setrestorePopover(true);
+  };
+
+  const restoreAgency = (id) => {
+    request({
+      url: "/agency/restore",
+      method: "POST",
+      data: { id: id },
+    })
+      .then((res) => {
+        if (res.status === 0) {
+          toast.error(res.response);
+        }
+        if (res.status === 1) {
+          toast.success(res.response);
+          setrestorePopover(false);
+          populateData();
+          getDeletedList();
+          deletedListAPI();
         }
       })
       .catch((err) => console.log(err));
@@ -444,8 +496,9 @@ const Dashboard = (props) => {
           setIsShow(false);
           setIsDeletedShow(true);
           setIsArchiveShow(false);
+          deletedListAPI();
         } else if (res.status === 0) {
-          console.log("error");
+          toast.error(res.response);
         }
       })
       .catch((err) => console.log(err));
@@ -481,25 +534,6 @@ const Dashboard = (props) => {
     getFilterLsit();
   };
 
-  const removeAgency = (e, id) => {
-    request({
-      url: "/agency/remove",
-      method: "POST",
-      data: { id: id },
-    })
-      .then((res) => {
-        if (res.status === 0) {
-          toast.error(res.response);
-        }
-        if (res.status === 1) {
-          toast.success(res.response);
-          getDeletedList();
-          deletedListAPI();
-        }
-      })
-      .catch((error) => console.log(error));
-  };
-
   const getImagePreview = (id) => {
     request({
       url: "/image/preview",
@@ -528,7 +562,6 @@ const Dashboard = (props) => {
   return (
     <div className="container">
       <div style={{ textAlign: "center", marginTop: "2em" }}>
-        <ToastContainer autoClose={1500} />
         <div className="header">
           <Navbar color="light" light expand="md">
             <NavbarToggler onClick={navbartoggle} />
@@ -703,9 +736,12 @@ const Dashboard = (props) => {
               <DeletedAgencyList
                 values={values}
                 sort={sort}
+                restore_id={restore_id}
+                restoreAgency={restoreAgency}
+                isRestore={isRestore}
                 getAgencyDetails={getAgencyDetails}
-                getRemoveAgency={removeAgency}
                 getImagePreview={getImagePreview}
+                isDeleteAgency={isDeleteAgency}
                 {...props}
               />
             </div>
@@ -765,8 +801,18 @@ const Dashboard = (props) => {
             <DeleteModal
               modal={isDeleteModal}
               toggle={toggleDeleteModal}
-              deleteAgency={deleteAgency}
+              deleteAgency={isPermanentDelete ? removeAgency : deleteAgency}
               id={deletId}
+            />
+          ) : (
+            ""
+          )}
+          {restorePopover ? (
+            <RestoreModal
+              modal={restorePopover}
+              toggle={toggleRestoreModal}
+              restoreAgency={restoreAgency}
+              id={restore_id}
             />
           ) : (
             ""
@@ -780,6 +826,7 @@ const Dashboard = (props) => {
           ) : null}
         </div>
       </div>
+      <ToastContainer autoClose={1500} />
     </div>
   );
 };

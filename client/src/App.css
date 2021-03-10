@@ -3,6 +3,11 @@
   justify-content: flex-end;
   align-items: center;
 } */
+.userContainer {
+  width: 30%;
+  margin: auto;
+}
+
 li.nav-item {
   cursor: pointer;
 }
@@ -137,4 +142,14 @@ button.focus {
   border: 0;
   padding: 7px !important;
   border-color: #ffffff !important;
+}
+
+.employeeTable table {
+  font-size: 0.8rem;
+  table-layout: fixed;
+  white-space: normal !important;
+}
+.employeeTable table thead tr th {
+  width: 130px;
+  word-wrap: break-word;
 }

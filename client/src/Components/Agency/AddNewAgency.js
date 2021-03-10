@@ -66,7 +66,6 @@ const AddNewAgency = (props) => {
   const languageCheck = (e, i) => {
     const checked = e.target.checked;
     const data = [...values.language];
-    console.log(checked);
     _.set(data[i], "key", checked ? 1 : 0);
     setValues({ ...values, language: data });
   };

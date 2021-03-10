@@ -45,28 +45,6 @@ module.exports = () => {
       dateofbirth: req.body.dateofbirth,
       status: 1,
       tempstatus: req.body.tempstatus,
-      actions: [
-        {
-          name: "view",
-          icon: "AiFillEye",
-          tooltip: "view",
-        },
-        {
-          name: "edit",
-          icon: "AiFillEye",
-          tooltip: "edit",
-        },
-        {
-          name: "delete",
-          icon: "AiFillEye",
-          tooltip: "delete",
-        },
-        {
-          name: "archive",
-          icon: "AiFillEye",
-          tooltip: "archive",
-        },
-      ],
     };
 
     if (req.body.password && req.body.confirm_password) {
@@ -417,13 +395,13 @@ module.exports = () => {
     if (!updateDoc) {
       return res.json({
         status: 0,
-        response: "Data not added to deleted list!",
+        response: "Agency not added to deleted list!",
       });
     }
     if (updateDoc) {
       return res.json({
         status: 1,
-        response: "Data added to deleted list successfully!",
+        response: "Agency moved to Trash!!",
       });
     }
   };
@@ -556,13 +534,13 @@ module.exports = () => {
     if (!updateDoc) {
       return res.json({
         status: 0,
-        response: "Data not added to Archive list!",
+        response: "Agency not added to Archive list!",
       });
     }
     if (updateDoc) {
       return res.json({
         status: 1,
-        response: "Data added to Archive list successfully!",
+        response: "Agency Archived!!",
       });
     }
   };
@@ -674,6 +652,27 @@ module.exports = () => {
     }
   };
 
+  router.agency_restore = async (req, res) => {
+    const data = {};
+    data.status = 0;
+    req.checkBody("id", "Invalid ID").notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      data.response = errors[0].msg;
+      return res.send(data);
+    }
+
+    let docData = await db.findOneandUpdateDoc(
+      "agencies",
+      { _id: req.body.id },
+      { tempstatus: 1 },
+      {}
+    );
+    docData
+      ? res.json({ status: 1, response: "Agency Restored!!" })
+      : res.json({ status: 0, response: "Some Error Occure!!" });
+  };
+
   router.image_preview = async (req, res) => {
     const data = {};
     data.status = 0;
@@ -703,8 +702,6 @@ module.exports = () => {
       });
     }
   };
-
-  router.permenent_delete_all = async (req, res) => {};
 
   return router;
 };

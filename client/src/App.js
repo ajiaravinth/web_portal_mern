@@ -9,9 +9,8 @@ import Register from "./Components/Auth/Register";
 import Routing from "./Components/Routing/Routing";
 
 function App() {
-  
   return (
-    <div>
+    <div className="wholeContainer">
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Login} />
@@ -24,4 +23,3 @@ function App() {
 }
 
 export default App;
-

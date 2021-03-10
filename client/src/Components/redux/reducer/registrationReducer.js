@@ -45,8 +45,8 @@ const registrationReducer = (state = initialData, action) => {
         }
         if (res.status === 1) {
           props.history.push("/admin/dashboard");
+          toast.success(res.message);
         }
-        toast.success(res.message);
       });
       return state;
 
@@ -60,10 +60,9 @@ const registrationReducer = (state = initialData, action) => {
           toast.error(res.response);
         }
         if (res.status === 1) {
-          alert("");
+          toast.success(res.response);
           props.history.push("/admin/dashboard");
         }
-        toast.success(res.response);
       });
       return state;
 

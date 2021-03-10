@@ -33,6 +33,7 @@ export const authReducer = (state = initialState, action) => {
           }
           if (res.status === 1) {
             localStorage.setItem("authToken", res.response.auth_token);
+            toast.success(res.message);
             props.history.push({
               pathname: "/admin/dashboard",
               state: {
@@ -40,7 +41,6 @@ export const authReducer = (state = initialState, action) => {
                 auth_token: res.response.auth_token,
               },
             });
-            toast.success(res.message);
             //   window.location.href = "http://localahost:3000/admin/dashboard";
           }
         })

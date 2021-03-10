@@ -1,5 +1,5 @@
 const db = require("../model/mongodb");
-module.exports = (app, io) => {
+module.exports = () => {
   const router = {};
 
   router.set_reminder = async (req, res) => {
@@ -20,8 +20,6 @@ module.exports = (app, io) => {
       reminder: req.body.start,
       description: req.body.description,
     };
-
-    // io.emit("subadmins", { _id: _id, status: status });
 
     let docData = await db.InsertDocs("reminders", reminder);
     if (!docData) {
@@ -76,8 +74,6 @@ module.exports = (app, io) => {
       { new: true }
     );
 
-    // console.log(docData, "docData");
-
     if (!docData) {
       res.json({
         status: 0,
@@ -108,8 +104,6 @@ module.exports = (app, io) => {
       { new: true }
     );
 
-    // console.log(docData, "docData");
-
     if (!docData) {
       res.json({
         status: 0,
@@ -123,5 +117,6 @@ module.exports = (app, io) => {
       });
     }
   };
+
   return router;
 };

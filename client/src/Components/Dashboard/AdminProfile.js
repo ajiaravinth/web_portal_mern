@@ -43,7 +43,7 @@ const AdminProfile = (props) => {
   return (
     <div className="container">
       <ToastContainer autoClose={1500} />
-      <div className="userContainer mt-4 ">
+      <div className="mt-4">
         <h3 style={{ textAlign: "center" }}>User Profile</h3>
         <AvForm onValidSubmit={formSubmit}>
           <Row>

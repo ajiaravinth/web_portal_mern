@@ -1,7 +1,12 @@
 import React from "react";
-import { Table } from "reactstrap";
+import {
+  Table,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+} from "reactstrap";
 import { AiFillEye } from "react-icons/ai";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { BiSortAZ, BiSortZA } from "react-icons/bi";
 import { NodeURL } from "../../api/api";
@@ -88,7 +93,50 @@ const ArchiveAgencyList = (props) => {
                 <td>{item.address.state}</td>
                 <td>{item.address.country}</td>
                 <td>{item.address.zipcode}</td>
-                <td>
+                <td onClick={(e) => e.stopPropagation()}>
+                  <UncontrolledDropdown
+                    className="opt-changes"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                    }}
+                  >
+                    <DropdownToggle className="option-methods">
+                      <span>
+                        <FaEllipsisV />
+                      </span>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <div className="update-lists">
+                        <button
+                          type="button"
+                          title="View"
+                          className="btn"
+                          onClick={(e) => getAgencyDetails(item._id, "view")}
+                        >
+                          <AiFillEye color="#1d61cf" /> View
+                        </button>
+                        <button
+                          type="button"
+                          title="Edit"
+                          className="btn"
+                          onClick={(e) => getAgencyDetails(item._id, "edit")}
+                        >
+                          <FiEdit color="#2b9c21" /> Edit
+                        </button>
+                        <button
+                          type="button"
+                          title="Delete"
+                          className="btn"
+                          onClick={() => isDeleteAgency(item._id, "trash")}
+                        >
+                          <FaTrashAlt color=" #ff4444" /> Delete
+                        </button>
+                      </div>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </td>
+                {/* <td>
                   <div
                     style={{
                       display: "flex",
@@ -114,8 +162,8 @@ const ArchiveAgencyList = (props) => {
                     >
                       <FaTrashAlt />
                     </span>
-                  </div>
-                  {/* {item.actions && item.actions.length > 0 && ( 
+                  </div> */}
+                {/* {item.actions && item.actions.length > 0 && ( 
                    {item.actions.map((action, i) => (
                       <div key={i}>
                         <span
@@ -133,7 +181,7 @@ const ArchiveAgencyList = (props) => {
                       </div>
                     ))} 
                    )} */}
-                </td>
+                {/* </td> */}
               </tr>
             ))
           ) : (

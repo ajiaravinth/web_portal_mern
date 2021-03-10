@@ -1,14 +1,25 @@
 import React from "react";
-import { Table } from "reactstrap";
+import {
+  Table,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  Popover,
+  PopoverHeader,
+  PopoverBody,
+} from "reactstrap";
 import { AiFillEye, AiOutlineCloseCircle } from "react-icons/ai";
 import { BiSortAZ, BiSortZA } from "react-icons/bi";
+import { MdSettingsBackupRestore } from "react-icons/md";
 import { NodeURL } from "../../api/api";
+import { FaEllipsisV } from "react-icons/fa";
 
 const DeletedAgencyList = (props) => {
   const {
     sort,
     getAgencyDetails,
-    getRemoveAgency,
+    isDeleteAgency,
+    isRestore,
     getImagePreview,
     values,
   } = props;
@@ -77,8 +88,8 @@ const DeletedAgencyList = (props) => {
                     <img
                       src={`${NodeURL + item.agency_logo}`}
                       alt={`${item.agency_name[i]}`}
-                      width="50px"
-                      height="50px"
+                      width="30px"
+                      height="30px"
                       onClick={() => getImagePreview(item._id)}
                     />
                   }
@@ -86,54 +97,49 @@ const DeletedAgencyList = (props) => {
                 <td>{item.address.state}</td>
                 <td>{item.address.country}</td>
                 <td>{item.address.zipcode}</td>
-                <td>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-evenly",
-                      cursor: "pointer",
+                <td onClick={(e) => e.stopPropagation()}>
+                  <UncontrolledDropdown
+                    className="opt-changes"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
                     }}
                   >
-                    <span
-                      style={{ color: "#1b83ce" }}
-                      onClick={(e) => getAgencyDetails(e, item._id, "view")}
-                    >
-                      <AiFillEye />
-                    </span>
-                    <span
-                      style={{ color: "red" }}
-                      onClick={(e) => getRemoveAgency(e, item._id)}
-                    >
-                      <AiOutlineCloseCircle />
-                    </span>
-                    {/* <span
-                      style={{ color: "#e83636c2" }}
-                      onClick={() => deleteAgency(item._id)}
-                    >
-                      <FaTrashAlt />
-                    </span>
-                    <span style={{ color: "#ffac2f" }}>
-                      <FaFileArchive />
-                    </span> */}
-                  </div>
-                  {/* {item.actions && item.actions.length > 0 && ( 
-                   {item.actions.map((action, i) => (
-                      <div key={i}>
-                        <span
-                          style={{ cursor: "pointer" }}
-                          id={`${action.name}${i}`}
+                    <DropdownToggle className="option-methods">
+                      <span>
+                        <FaEllipsisV />
+                      </span>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <div className="update-lists">
+                        <button
+                          type="button"
+                          title="View"
+                          className="btn"
+                          onClick={(e) => getAgencyDetails(item._id, "view")}
                         >
-                          {String(`<${action.icon} />`)}
-                        </span>
-                        <UncontrolledTooltip
-                          target={`${action.name}${i}`}
-                          placement="left"
+                          <AiFillEye color="#1b83ce" /> View
+                        </button>
+                        <button
+                          type="button"
+                          title="Delete"
+                          className="btn"
+                          onClick={(e) => isDeleteAgency(item._id, "permanent")}
                         >
-                          {action.tooltip}
-                        </UncontrolledTooltip>
+                          <AiOutlineCloseCircle color=" #ff4444" /> Delete
+                        </button>
+                        <button
+                          type="button"
+                          title="Restore"
+                          className="btn"
+                          id={`RestoreAgency${i}`}
+                          onClick={(e) => isRestore(item._id)}
+                        >
+                          <MdSettingsBackupRestore /> Restore
+                        </button>
                       </div>
-                    ))} 
-                   )} */}
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
                 </td>
               </tr>
             ))

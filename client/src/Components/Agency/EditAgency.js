@@ -539,7 +539,7 @@ const EditAgency = (props) => {
                 <Label>Agency Logo</Label>
                 <CustomInput
                   type="file"
-                  // name="agency_logo"
+                  id="agency_logo"
                   label={
                     values.agency_logoname !== "" ? values.agency_logoname : ""
                   }
