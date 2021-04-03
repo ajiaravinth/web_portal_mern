@@ -4,9 +4,6 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  Popover,
-  PopoverHeader,
-  PopoverBody,
 } from "reactstrap";
 import { AiFillEye, AiOutlineCloseCircle } from "react-icons/ai";
 import { BiSortAZ, BiSortZA } from "react-icons/bi";

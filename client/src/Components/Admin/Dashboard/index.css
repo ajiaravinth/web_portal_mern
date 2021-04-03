@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1em;
+    margin: 1em 0;
+}
+
+.booking-count {
+    width: 25%;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1.5em;
+    text-align: center;
+}

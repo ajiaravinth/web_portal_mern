@@ -46,14 +46,10 @@ const EditAgency = (props) => {
     if (id) {
       setAgencyId(id);
     }
-    popualteData();
-  }, []);
-
-  const popualteData = () => {
     request({
       url: "/agency/details",
       method: "POST",
-      data: { _id: agencyId },
+      data: { _id: id },
     }).then((res) => {
       if (res.status === 0) {
         toast.error("Update Failed!!");
@@ -88,7 +84,7 @@ const EditAgency = (props) => {
         });
       }
     });
-  };
+  }, [props]);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });

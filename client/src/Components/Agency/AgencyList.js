@@ -33,7 +33,7 @@ const AgencyList = (props) => {
 
   return (
     <div>
-      <Table hover responsive>
+      <Table hover responsive onContextMenu={(e) => e.preventDefault()}>
         <thead>
           <tr>
             <th>S.No</th>

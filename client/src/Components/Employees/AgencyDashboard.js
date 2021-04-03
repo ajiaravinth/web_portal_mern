@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table, Row, Col } from "reactstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import request from "../../api/api";
 import { IoMdRadioButtonOn } from "react-icons/io";
 

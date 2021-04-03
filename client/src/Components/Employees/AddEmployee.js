@@ -7,7 +7,6 @@ import IntlTelInput from "react-intl-tel-input";
 import { libphonenumber } from "react-intl-tel-input/dist";
 import Select from "react-select";
 import request from "../../api/api";
-import _ from "lodash";
 import Switch from "react-switch";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -47,7 +46,7 @@ const AddEmployee = (props) => {
         setusernameList(listData);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [props]);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
